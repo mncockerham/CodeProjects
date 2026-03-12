@@ -17,7 +17,7 @@ clean-targets:         # directories to be removed by 'dbt clean'
   - "dbt_packages"
 
 vars:
-  source_url: 'postgresql://postgres:ZAQ!2wsx@localhost:5432/postgres_air'
+  source_url: 'postgresql://postgres@localhost:5432/postgres_air'
 
 models:
   my_dbt_project:

@@ -1,1 +1,1 @@
-{"_invocation_id": "532354c8-28e4-4c1b-b661-4dac449885aa", "linked": {"0": {"name": "source.my_dbt_project.my_postgres.customers", "type": "source"}, "1": {"name": "model.my_dbt_project.phone_ppi_clean", "type": "model"}}}
+{"_invocation_id": "99062174-8d29-44ac-a388-4315865069e0", "linked": {"0": {"name": "source.my_dbt_project.my_postgres.customers", "type": "source"}, "1": {"name": "model.my_dbt_project.phone_ppi_clean", "type": "model"}}}

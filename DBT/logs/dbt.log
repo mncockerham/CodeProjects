@@ -1340,3 +1340,655 @@ alter table "local"."main"."phone_ppi_clean__dbt_tmp" rename to "phone_ppi_clean
 [0m21:05:49.520750 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c50d180>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bd9c2d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bd9c0f0>]}
 [0m21:05:49.520898 [debug] [MainThread]: Flushing usage events
 [0m21:05:49.846314 [debug] [MainThread]: An error was encountered while trying to flush usage events
+==================== 2026-03-12T21:54:13.044751Z | 019ce40b-03b2-74d2-8513-e9d30baf6ea3 ====================
+dbt-fusion 2.0.0-preview.85
+21:54:13.046538 [info ]: Started loading project
+   Loading profiles.yml
+21:54:13.051338 [info ]: Finished loading project [  0.00s]
+21:54:13.051651 [error]: dbt1005: Failed to parse profiles.yml: unknown variant `duckdb`, expected one of `redshift`, `snowflake`, `postgres`, `bigquery`, `trino`, `datafusion`, `databricks`, `salesforce`
+21:54:13.433429 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [388ms]
+[0m17:55:14.906530 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10caf01a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d937c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d9379d0>]}
+
+
+============================== 17:55:14.909002 | a4f7f813-f114-424d-a236-a59269b8ffce ==============================
+[0m17:55:14.909002 [info ] [MainThread]: Running with dbt=1.10.15
+[0m17:55:14.909237 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'indirect_selection': 'eager', 'log_format': 'default', 'invocation_command': 'dbt run --profiles-dir .', 'fail_fast': 'False', 'empty': 'False', 'static_parser': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'introspect': 'True', 'printer_width': '80', 'warn_error': 'None', 'cache_selected_only': 'False', 'quiet': 'False', 'debug': 'False', 'send_anonymous_usage_stats': 'True', 'profiles_dir': '.', 'log_cache_events': 'False', 'write_json': 'True', 'target_path': 'None', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'log_path': '/Users/mark/github/CodeProjects/DBT/logs'}
+[0m17:55:14.989145 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ccac510>]}
+[0m17:55:15.008119 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d9f5f20>]}
+[0m17:55:15.009006 [info ] [MainThread]: Registered adapter: duckdb=1.10.0
+[0m17:55:15.065002 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m17:55:15.128178 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m17:55:15.128357 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m17:55:15.130482 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.my_dbt_project.example
+[0m17:55:15.140065 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10dd85f50>]}
+[0m17:55:15.163993 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/mark/github/CodeProjects/DBT/target/manifest.json
+[0m17:55:15.164766 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/mark/github/CodeProjects/DBT/target/semantic_manifest.json
+[0m17:55:15.176846 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10dc648c0>]}
+[0m17:55:15.177064 [info ] [MainThread]: Found 1 model, 1 source, 468 macros
+[0m17:55:15.177184 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10da760b0>]}
+[0m17:55:15.178108 [info ] [MainThread]: 
+[0m17:55:15.178231 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m17:55:15.178320 [info ] [MainThread]: 
+[0m17:55:15.178495 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m17:55:15.178815 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_local'
+[0m17:55:15.216698 [debug] [ThreadPool]: Using duckdb connection "list_local"
+[0m17:55:15.216888 [debug] [ThreadPool]: On list_local: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "list_local"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"local"'
+    
+  
+  
+[0m17:55:15.216987 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:55:15.223579 [debug] [ThreadPool]: SQL status: OK in 0.007 seconds
+[0m17:55:15.224232 [debug] [ThreadPool]: On list_local: Close
+[0m17:55:15.224514 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_local, now create_local_main)
+[0m17:55:15.224669 [debug] [ThreadPool]: Creating schema "database: "local"
+schema: "main"
+"
+[0m17:55:15.226995 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:55:15.227103 [debug] [ThreadPool]: On create_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "create_local_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='local'
+        and type='sqlite'
+    
+  
+[0m17:55:15.227189 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:55:15.227487 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:55:15.227927 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:55:15.228023 [debug] [ThreadPool]: On create_local_main: BEGIN
+[0m17:55:15.228171 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:55:15.228251 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:55:15.228331 [debug] [ThreadPool]: On create_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "create_local_main"} */
+
+    
+    
+        create schema if not exists "local"."main"
+    
+[0m17:55:15.228515 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:55:15.228810 [debug] [ThreadPool]: On create_local_main: COMMIT
+[0m17:55:15.228904 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:55:15.228983 [debug] [ThreadPool]: On create_local_main: COMMIT
+[0m17:55:15.229149 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:55:15.229283 [debug] [ThreadPool]: On create_local_main: Close
+[0m17:55:15.229656 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_local_main, now list_local_main)
+[0m17:55:15.231542 [debug] [ThreadPool]: Using duckdb connection "list_local_main"
+[0m17:55:15.231656 [debug] [ThreadPool]: On list_local_main: BEGIN
+[0m17:55:15.231736 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:55:15.231886 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:55:15.232213 [debug] [ThreadPool]: Using duckdb connection "list_local_main"
+[0m17:55:15.232301 [debug] [ThreadPool]: On list_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "list_local_main"} */
+select
+      'local' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'local'
+  
+[0m17:55:15.236080 [debug] [ThreadPool]: SQL status: OK in 0.004 seconds
+[0m17:55:15.236533 [debug] [ThreadPool]: On list_local_main: ROLLBACK
+[0m17:55:15.237346 [debug] [ThreadPool]: Failed to rollback 'list_local_main'
+[0m17:55:15.237440 [debug] [ThreadPool]: On list_local_main: Close
+[0m17:55:15.237793 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e2058b0>]}
+[0m17:55:15.238038 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:55:15.238139 [debug] [MainThread]: On master: BEGIN
+[0m17:55:15.238215 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m17:55:15.238401 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:55:15.238479 [debug] [MainThread]: On master: COMMIT
+[0m17:55:15.238554 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:55:15.238623 [debug] [MainThread]: On master: COMMIT
+[0m17:55:15.238767 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:55:15.238861 [debug] [MainThread]: On master: Close
+[0m17:55:15.239943 [debug] [Thread-1 (]: Began running node model.my_dbt_project.phone_ppi_clean
+[0m17:55:15.240126 [info ] [Thread-1 (]: 1 of 1 START sql table model main.phone_ppi_clean .............................. [RUN]
+[0m17:55:15.240276 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_local_main, now model.my_dbt_project.phone_ppi_clean)
+[0m17:55:15.240381 [debug] [Thread-1 (]: Began compiling node model.my_dbt_project.phone_ppi_clean
+[0m17:55:15.242909 [debug] [Thread-1 (]: Writing injected SQL for node "model.my_dbt_project.phone_ppi_clean"
+[0m17:55:15.243169 [debug] [Thread-1 (]: Began executing node model.my_dbt_project.phone_ppi_clean
+[0m17:55:15.255594 [debug] [Thread-1 (]: Writing runtime sql for node "model.my_dbt_project.phone_ppi_clean"
+[0m17:55:15.255861 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m17:55:15.255967 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: BEGIN
+[0m17:55:15.256055 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m17:55:15.256237 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m17:55:15.256336 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m17:55:15.256437 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+  
+    
+    
+
+    create  table
+      "local"."main"."phone_ppi_clean__dbt_tmp"
+  
+    as (
+      
+
+select 
+    phone_id,
+    account_id,
+    sha256(phone) as phone_encrypted,
+    phone_type,
+    primary_phone,
+    update_ts
+from postgres_scan('postgresql://postgres:ZAQ!2wsx@localhost:5432/postgres_air', 'postgres_air', 'phone')
+    );
+  
+  
+[0m17:55:20.469121 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+  
+    
+    
+
+    create  table
+      "local"."main"."phone_ppi_clean__dbt_tmp"
+  
+    as (
+      
+
+select 
+    phone_id,
+    account_id,
+    sha256(phone) as phone_encrypted,
+    phone_type,
+    primary_phone,
+    update_ts
+from postgres_scan('postgresql://postgres:ZAQ!2wsx@localhost:5432/postgres_air', 'postgres_air', 'phone')
+    );
+  
+  
+[0m17:55:20.469979 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m17:55:20.470652 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: ROLLBACK
+[0m17:55:20.487548 [debug] [Thread-1 (]: Failed to rollback 'model.my_dbt_project.phone_ppi_clean'
+[0m17:55:20.488063 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: Close
+[0m17:55:20.490364 [debug] [Thread-1 (]: Runtime Error in model phone_ppi_clean (models/phone_ppi_clean.sql)
+  IO Error: Unable to connect to Postgres at "postgresql://postgres:ZAQ!2wsx@localhost:5432/postgres_air": connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "postgres_air" does not exist
+  
+  
+  LINE 20: from postgres_scan('postgresql://postgres:ZAQ!2wsx@localhost...
+                ^
+[0m17:55:20.493145 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'a4f7f813-f114-424d-a236-a59269b8ffce', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e3cc410>]}
+[0m17:55:20.494162 [error] [Thread-1 (]: 1 of 1 ERROR creating sql table model main.phone_ppi_clean ..................... [[31mERROR[0m in 5.25s]
+[0m17:55:20.494541 [debug] [Thread-1 (]: Finished running node model.my_dbt_project.phone_ppi_clean
+[0m17:55:20.494853 [debug] [Thread-4 (]: Marking all children of 'model.my_dbt_project.phone_ppi_clean' to be skipped because of status 'error'.  Reason: Runtime Error in model phone_ppi_clean (models/phone_ppi_clean.sql)
+  IO Error: Unable to connect to Postgres at "postgresql://postgres:ZAQ!2wsx@localhost:5432/postgres_air": connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "postgres_air" does not exist
+  
+  
+  LINE 20: from postgres_scan('postgresql://postgres:ZAQ!2wsx@localhost...
+                ^.
+[0m17:55:20.495981 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:55:20.496159 [debug] [MainThread]: On master: BEGIN
+[0m17:55:20.496279 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m17:55:20.496733 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:55:20.496908 [debug] [MainThread]: On master: COMMIT
+[0m17:55:20.497067 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:55:20.497222 [debug] [MainThread]: On master: COMMIT
+[0m17:55:20.497559 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:55:20.497724 [debug] [MainThread]: On master: Close
+[0m17:55:20.498068 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m17:55:20.498221 [debug] [MainThread]: Connection 'model.my_dbt_project.phone_ppi_clean' was properly closed.
+[0m17:55:20.498372 [info ] [MainThread]: 
+[0m17:55:20.498521 [info ] [MainThread]: Finished running 1 table model in 0 hours 0 minutes and 5.32 seconds (5.32s).
+[0m17:55:20.499155 [debug] [MainThread]: Command end result
+[0m17:55:20.544587 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/mark/github/CodeProjects/DBT/target/manifest.json
+[0m17:55:20.545428 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/mark/github/CodeProjects/DBT/target/semantic_manifest.json
+[0m17:55:20.547842 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/mark/github/CodeProjects/DBT/target/run_results.json
+[0m17:55:20.547970 [info ] [MainThread]: 
+[0m17:55:20.548108 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m17:55:20.548220 [info ] [MainThread]: 
+[0m17:55:20.548352 [error] [MainThread]: [31mFailure in model phone_ppi_clean (models/phone_ppi_clean.sql)[0m
+[0m17:55:20.548471 [error] [MainThread]:   Runtime Error in model phone_ppi_clean (models/phone_ppi_clean.sql)
+  IO Error: Unable to connect to Postgres at "postgresql://postgres:ZAQ!2wsx@localhost:5432/postgres_air": connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "postgres_air" does not exist
+  
+  
+  LINE 20: from postgres_scan('postgresql://postgres:ZAQ!2wsx@localhost...
+                ^
+[0m17:55:20.548565 [info ] [MainThread]: 
+[0m17:55:20.548670 [info ] [MainThread]:   compiled code at target/compiled/my_dbt_project/models/phone_ppi_clean.sql
+[0m17:55:20.548758 [info ] [MainThread]: 
+[0m17:55:20.548860 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=1
+[0m17:55:20.571907 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 5.6972365, "process_in_blocks": "0", "process_kernel_time": 0.153438, "process_mem_max_rss": "156139520", "process_out_blocks": "0", "process_user_time": 0.815}
+[0m17:55:20.572181 [debug] [MainThread]: Command `dbt run` failed at 17:55:20.572138 after 5.70 seconds
+[0m17:55:20.572421 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10dfa2570>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10dbb2a30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10dbb2e90>]}
+[0m17:55:20.572635 [debug] [MainThread]: Flushing usage events
+[0m17:55:20.863609 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m17:56:26.246668 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1086f01a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109533c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1095339d0>]}
+
+
+============================== 17:56:26.248408 | a5956a73-bc74-435b-9783-fac0813df1a9 ==============================
+[0m17:56:26.248408 [info ] [MainThread]: Running with dbt=1.10.15
+[0m17:56:26.248642 [debug] [MainThread]: running dbt with arguments {'target_path': 'None', 'indirect_selection': 'eager', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'debug': 'False', 'log_path': '/Users/mark/github/CodeProjects/DBT/logs', 'profiles_dir': '.', 'use_experimental_parser': 'False', 'version_check': 'True', 'log_format': 'default', 'warn_error': 'None', 'printer_width': '80', 'cache_selected_only': 'False', 'log_cache_events': 'False', 'use_colors': 'True', 'quiet': 'False', 'fail_fast': 'False', 'invocation_command': 'dbt run --profiles-dir .', 'send_anonymous_usage_stats': 'True', 'introspect': 'True', 'write_json': 'True', 'empty': 'False', 'partial_parse': 'True', 'no_print': 'None'}
+[0m17:56:26.319253 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1088a8510>]}
+[0m17:56:26.338026 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1095f1f20>]}
+[0m17:56:26.338763 [info ] [MainThread]: Registered adapter: duckdb=1.10.0
+[0m17:56:26.370558 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m17:56:26.399973 [info ] [MainThread]: Unable to do partial parsing because a project config has changed
+[0m17:56:26.400211 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10997c150>]}
+[0m17:56:26.780797 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.my_dbt_project.example
+[0m17:56:26.784236 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109861d60>]}
+[0m17:56:26.806635 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/mark/github/CodeProjects/DBT/target/manifest.json
+[0m17:56:26.807364 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/mark/github/CodeProjects/DBT/target/semantic_manifest.json
+[0m17:56:26.812278 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109cff070>]}
+[0m17:56:26.812429 [info ] [MainThread]: Found 1 model, 1 source, 468 macros
+[0m17:56:26.812541 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109abbc70>]}
+[0m17:56:26.813161 [info ] [MainThread]: 
+[0m17:56:26.813282 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m17:56:26.813370 [info ] [MainThread]: 
+[0m17:56:26.813540 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m17:56:26.813866 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_local'
+[0m17:56:26.834636 [debug] [ThreadPool]: Using duckdb connection "list_local"
+[0m17:56:26.834796 [debug] [ThreadPool]: On list_local: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "list_local"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"local"'
+    
+  
+  
+[0m17:56:26.834889 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m17:56:26.839676 [debug] [ThreadPool]: SQL status: OK in 0.005 seconds
+[0m17:56:26.840283 [debug] [ThreadPool]: On list_local: Close
+[0m17:56:26.840648 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_local, now create_local_main)
+[0m17:56:26.840854 [debug] [ThreadPool]: Creating schema "database: "local"
+schema: "main"
+"
+[0m17:56:26.843242 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:56:26.843355 [debug] [ThreadPool]: On create_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "create_local_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='local'
+        and type='sqlite'
+    
+  
+[0m17:56:26.843442 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:56:26.843795 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:56:26.844218 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:56:26.844310 [debug] [ThreadPool]: On create_local_main: BEGIN
+[0m17:56:26.844464 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:56:26.844558 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:56:26.844658 [debug] [ThreadPool]: On create_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "create_local_main"} */
+
+    
+    
+        create schema if not exists "local"."main"
+    
+[0m17:56:26.844829 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:56:26.845079 [debug] [ThreadPool]: On create_local_main: COMMIT
+[0m17:56:26.845171 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m17:56:26.845248 [debug] [ThreadPool]: On create_local_main: COMMIT
+[0m17:56:26.845375 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:56:26.845457 [debug] [ThreadPool]: On create_local_main: Close
+[0m17:56:26.845801 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_local_main, now list_local_main)
+[0m17:56:26.847600 [debug] [ThreadPool]: Using duckdb connection "list_local_main"
+[0m17:56:26.847698 [debug] [ThreadPool]: On list_local_main: BEGIN
+[0m17:56:26.847772 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m17:56:26.847910 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m17:56:26.848231 [debug] [ThreadPool]: Using duckdb connection "list_local_main"
+[0m17:56:26.848319 [debug] [ThreadPool]: On list_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "list_local_main"} */
+select
+      'local' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'local'
+  
+[0m17:56:26.851970 [debug] [ThreadPool]: SQL status: OK in 0.004 seconds
+[0m17:56:26.852415 [debug] [ThreadPool]: On list_local_main: ROLLBACK
+[0m17:56:26.852848 [debug] [ThreadPool]: Failed to rollback 'list_local_main'
+[0m17:56:26.852937 [debug] [ThreadPool]: On list_local_main: Close
+[0m17:56:26.853238 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a084350>]}
+[0m17:56:26.853391 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:56:26.853519 [debug] [MainThread]: On master: BEGIN
+[0m17:56:26.853625 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m17:56:26.853802 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:56:26.853896 [debug] [MainThread]: On master: COMMIT
+[0m17:56:26.853970 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:56:26.854043 [debug] [MainThread]: On master: COMMIT
+[0m17:56:26.854191 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:56:26.854294 [debug] [MainThread]: On master: Close
+[0m17:56:26.855004 [debug] [Thread-1 (]: Began running node model.my_dbt_project.phone_ppi_clean
+[0m17:56:26.855163 [info ] [Thread-1 (]: 1 of 1 START sql table model main.phone_ppi_clean .............................. [RUN]
+[0m17:56:26.855310 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_local_main, now model.my_dbt_project.phone_ppi_clean)
+[0m17:56:26.855417 [debug] [Thread-1 (]: Began compiling node model.my_dbt_project.phone_ppi_clean
+[0m17:56:26.858038 [debug] [Thread-1 (]: Writing injected SQL for node "model.my_dbt_project.phone_ppi_clean"
+[0m17:56:26.858331 [debug] [Thread-1 (]: Began executing node model.my_dbt_project.phone_ppi_clean
+[0m17:56:26.872480 [debug] [Thread-1 (]: Writing runtime sql for node "model.my_dbt_project.phone_ppi_clean"
+[0m17:56:26.872887 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m17:56:26.873012 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: BEGIN
+[0m17:56:26.873122 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m17:56:26.873434 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m17:56:26.873546 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m17:56:26.873640 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+  
+    
+    
+
+    create  table
+      "local"."main"."phone_ppi_clean__dbt_tmp"
+  
+    as (
+      
+
+select 
+    phone_id,
+    account_id,
+    sha256(phone) as phone_encrypted,
+    phone_type,
+    primary_phone,
+    update_ts
+from postgres_scan('postgresql://postgres@localhost:5432/postgres_air', 'postgres_air', 'phone')
+    );
+  
+  
+[0m17:56:26.921510 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+  
+    
+    
+
+    create  table
+      "local"."main"."phone_ppi_clean__dbt_tmp"
+  
+    as (
+      
+
+select 
+    phone_id,
+    account_id,
+    sha256(phone) as phone_encrypted,
+    phone_type,
+    primary_phone,
+    update_ts
+from postgres_scan('postgresql://postgres@localhost:5432/postgres_air', 'postgres_air', 'phone')
+    );
+  
+  
+[0m17:56:26.921746 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m17:56:26.921942 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: ROLLBACK
+[0m17:56:26.924168 [debug] [Thread-1 (]: Failed to rollback 'model.my_dbt_project.phone_ppi_clean'
+[0m17:56:26.924296 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: Close
+[0m17:56:26.925643 [debug] [Thread-1 (]: Runtime Error in model phone_ppi_clean (models/phone_ppi_clean.sql)
+  IO Error: Unable to connect to Postgres at "postgresql://postgres@localhost:5432/postgres_air": connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "postgres_air" does not exist
+  
+  
+  LINE 20: from postgres_scan('postgresql://postgres@localhost:5432/postgre...
+                ^
+[0m17:56:26.926306 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'a5956a73-bc74-435b-9783-fac0813df1a9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109da3120>]}
+[0m17:56:26.926545 [error] [Thread-1 (]: 1 of 1 ERROR creating sql table model main.phone_ppi_clean ..................... [[31mERROR[0m in 0.07s]
+[0m17:56:26.926744 [debug] [Thread-1 (]: Finished running node model.my_dbt_project.phone_ppi_clean
+[0m17:56:26.926906 [debug] [Thread-4 (]: Marking all children of 'model.my_dbt_project.phone_ppi_clean' to be skipped because of status 'error'.  Reason: Runtime Error in model phone_ppi_clean (models/phone_ppi_clean.sql)
+  IO Error: Unable to connect to Postgres at "postgresql://postgres@localhost:5432/postgres_air": connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "postgres_air" does not exist
+  
+  
+  LINE 20: from postgres_scan('postgresql://postgres@localhost:5432/postgre...
+                ^.
+[0m17:56:26.927599 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:56:26.927743 [debug] [MainThread]: On master: BEGIN
+[0m17:56:26.927850 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m17:56:26.928092 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:56:26.928194 [debug] [MainThread]: On master: COMMIT
+[0m17:56:26.928282 [debug] [MainThread]: Using duckdb connection "master"
+[0m17:56:26.928369 [debug] [MainThread]: On master: COMMIT
+[0m17:56:26.928526 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m17:56:26.928615 [debug] [MainThread]: On master: Close
+[0m17:56:26.928741 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m17:56:26.928831 [debug] [MainThread]: Connection 'model.my_dbt_project.phone_ppi_clean' was properly closed.
+[0m17:56:26.928926 [info ] [MainThread]: 
+[0m17:56:26.929029 [info ] [MainThread]: Finished running 1 table model in 0 hours 0 minutes and 0.12 seconds (0.12s).
+[0m17:56:26.929265 [debug] [MainThread]: Command end result
+[0m17:56:26.937108 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/mark/github/CodeProjects/DBT/target/manifest.json
+[0m17:56:26.937880 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/mark/github/CodeProjects/DBT/target/semantic_manifest.json
+[0m17:56:26.939989 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/mark/github/CodeProjects/DBT/target/run_results.json
+[0m17:56:26.940091 [info ] [MainThread]: 
+[0m17:56:26.940222 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m17:56:26.940321 [info ] [MainThread]: 
+[0m17:56:26.940443 [error] [MainThread]: [31mFailure in model phone_ppi_clean (models/phone_ppi_clean.sql)[0m
+[0m17:56:26.940556 [error] [MainThread]:   Runtime Error in model phone_ppi_clean (models/phone_ppi_clean.sql)
+  IO Error: Unable to connect to Postgres at "postgresql://postgres@localhost:5432/postgres_air": connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "postgres_air" does not exist
+  
+  
+  LINE 20: from postgres_scan('postgresql://postgres@localhost:5432/postgre...
+                ^
+[0m17:56:26.940646 [info ] [MainThread]: 
+[0m17:56:26.940746 [info ] [MainThread]:   compiled code at target/compiled/my_dbt_project/models/phone_ppi_clean.sql
+[0m17:56:26.940828 [info ] [MainThread]: 
+[0m17:56:26.940927 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=1
+[0m17:56:26.941965 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.7222598, "process_in_blocks": "0", "process_kernel_time": 0.132488, "process_mem_max_rss": "159973376", "process_out_blocks": "0", "process_user_time": 1.149777}
+[0m17:56:26.942103 [debug] [MainThread]: Command `dbt run` failed at 17:56:26.942076 after 0.72 seconds
+[0m17:56:26.942233 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109b0ea30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a062330>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109f780d0>]}
+[0m17:56:26.942353 [debug] [MainThread]: Flushing usage events
+[0m17:56:27.088237 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:04:30.145544 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108a6c1a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1098b3c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1098b39d0>]}
+
+
+============================== 18:04:30.147949 | 99062174-8d29-44ac-a388-4315865069e0 ==============================
+[0m18:04:30.147949 [info ] [MainThread]: Running with dbt=1.10.15
+[0m18:04:30.148182 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'target_path': 'None', 'use_experimental_parser': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'partial_parse': 'True', 'introspect': 'True', 'profiles_dir': '.', 'cache_selected_only': 'False', 'indirect_selection': 'eager', 'fail_fast': 'False', 'warn_error': 'None', 'log_path': '/Users/mark/github/CodeProjects/DBT/logs', 'static_parser': 'True', 'use_colors': 'True', 'no_print': 'None', 'invocation_command': 'dbt run --profiles-dir .', 'printer_width': '80', 'log_format': 'default', 'log_cache_events': 'False', 'debug': 'False', 'empty': 'False', 'version_check': 'True'}
+[0m18:04:30.311935 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108c28510>]}
+[0m18:04:30.331485 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109971f20>]}
+[0m18:04:30.333824 [info ] [MainThread]: Registered adapter: duckdb=1.10.0
+[0m18:04:30.373448 [debug] [MainThread]: checksum: 14a228079bd6df63ba81633f9a3cf44ecfaa31056ac397c602753ec895dbf885, vars: {}, profile: , target: , version: 1.10.15
+[0m18:04:30.439672 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:04:30.439834 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:04:30.441924 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 1 unused configuration paths:
+- models.my_dbt_project.example
+[0m18:04:30.451878 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109cfdf50>]}
+[0m18:04:30.480733 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/mark/github/CodeProjects/DBT/target/manifest.json
+[0m18:04:30.483504 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/mark/github/CodeProjects/DBT/target/semantic_manifest.json
+[0m18:04:30.496208 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109be08c0>]}
+[0m18:04:30.496459 [info ] [MainThread]: Found 1 model, 1 source, 468 macros
+[0m18:04:30.496686 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1099f20b0>]}
+[0m18:04:30.499068 [info ] [MainThread]: 
+[0m18:04:30.499539 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m18:04:30.499792 [info ] [MainThread]: 
+[0m18:04:30.500237 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m18:04:30.501301 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_local'
+[0m18:04:30.530283 [debug] [ThreadPool]: Using duckdb connection "list_local"
+[0m18:04:30.530451 [debug] [ThreadPool]: On list_local: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "list_local"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"local"'
+    
+  
+  
+[0m18:04:30.530545 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:04:30.544686 [debug] [ThreadPool]: SQL status: OK in 0.014 seconds
+[0m18:04:30.545321 [debug] [ThreadPool]: On list_local: Close
+[0m18:04:30.545597 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_local, now create_local_main)
+[0m18:04:30.545758 [debug] [ThreadPool]: Creating schema "database: "local"
+schema: "main"
+"
+[0m18:04:30.548174 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m18:04:30.548295 [debug] [ThreadPool]: On create_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "create_local_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='local'
+        and type='sqlite'
+    
+  
+[0m18:04:30.548383 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:04:30.548823 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m18:04:30.549276 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m18:04:30.549368 [debug] [ThreadPool]: On create_local_main: BEGIN
+[0m18:04:30.549514 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m18:04:30.549599 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m18:04:30.549685 [debug] [ThreadPool]: On create_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "create_local_main"} */
+
+    
+    
+        create schema if not exists "local"."main"
+    
+[0m18:04:30.549843 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m18:04:30.550115 [debug] [ThreadPool]: On create_local_main: COMMIT
+[0m18:04:30.550209 [debug] [ThreadPool]: Using duckdb connection "create_local_main"
+[0m18:04:30.550289 [debug] [ThreadPool]: On create_local_main: COMMIT
+[0m18:04:30.550453 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m18:04:30.550599 [debug] [ThreadPool]: On create_local_main: Close
+[0m18:04:30.550982 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_local_main, now list_local_main)
+[0m18:04:30.552817 [debug] [ThreadPool]: Using duckdb connection "list_local_main"
+[0m18:04:30.552916 [debug] [ThreadPool]: On list_local_main: BEGIN
+[0m18:04:30.552998 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:04:30.553162 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m18:04:30.553478 [debug] [ThreadPool]: Using duckdb connection "list_local_main"
+[0m18:04:30.553566 [debug] [ThreadPool]: On list_local_main: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "connection_name": "list_local_main"} */
+select
+      'local' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'local'
+  
+[0m18:04:30.559516 [debug] [ThreadPool]: SQL status: OK in 0.006 seconds
+[0m18:04:30.560132 [debug] [ThreadPool]: On list_local_main: ROLLBACK
+[0m18:04:30.560823 [debug] [ThreadPool]: Failed to rollback 'list_local_main'
+[0m18:04:30.560912 [debug] [ThreadPool]: On list_local_main: Close
+[0m18:04:30.561181 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a05fa00>]}
+[0m18:04:30.561327 [debug] [MainThread]: Using duckdb connection "master"
+[0m18:04:30.561411 [debug] [MainThread]: On master: BEGIN
+[0m18:04:30.561490 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:04:30.561642 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m18:04:30.561723 [debug] [MainThread]: On master: COMMIT
+[0m18:04:30.561809 [debug] [MainThread]: Using duckdb connection "master"
+[0m18:04:30.561888 [debug] [MainThread]: On master: COMMIT
+[0m18:04:30.562038 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m18:04:30.562184 [debug] [MainThread]: On master: Close
+[0m18:04:30.563204 [debug] [Thread-1 (]: Began running node model.my_dbt_project.phone_ppi_clean
+[0m18:04:30.563385 [info ] [Thread-1 (]: 1 of 1 START sql table model main.phone_ppi_clean .............................. [RUN]
+[0m18:04:30.563532 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_local_main, now model.my_dbt_project.phone_ppi_clean)
+[0m18:04:30.563646 [debug] [Thread-1 (]: Began compiling node model.my_dbt_project.phone_ppi_clean
+[0m18:04:30.566307 [debug] [Thread-1 (]: Writing injected SQL for node "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:30.566737 [debug] [Thread-1 (]: Began executing node model.my_dbt_project.phone_ppi_clean
+[0m18:04:30.581356 [debug] [Thread-1 (]: Writing runtime sql for node "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:30.581726 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:30.581841 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: BEGIN
+[0m18:04:30.581935 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:04:30.582181 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m18:04:30.582273 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:30.582366 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+  
+    
+    
+
+    create  table
+      "local"."main"."phone_ppi_clean__dbt_tmp"
+  
+    as (
+      
+
+select 
+    phone_id,
+    account_id,
+    sha256(phone) as phone_encrypted,
+    phone_type,
+    primary_phone,
+    update_ts
+from postgres_scan('postgresql://postgres@localhost:5432/postgres_air', 'postgres_air', 'phone')
+    );
+  
+  
+[0m18:04:31.166250 [debug] [Thread-1 (]: SQL status: OK in 0.584 seconds
+[0m18:04:31.168728 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:31.168903 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+    SELECT index_name
+    FROM duckdb_indexes()
+    WHERE schema_name = 'main'
+      AND table_name = 'phone_ppi_clean'
+  
+[0m18:04:31.169291 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m18:04:31.169775 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:31.169902 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+    SELECT COUNT(*) as remaining_indexes
+    FROM duckdb_indexes()
+    WHERE schema_name = 'main'
+      AND table_name = 'phone_ppi_clean'
+  
+[0m18:04:31.170442 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m18:04:31.172952 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:31.173096 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+alter table "local"."main"."phone_ppi_clean" rename to "phone_ppi_clean__dbt_backup"
+[0m18:04:31.174040 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m18:04:31.175229 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:31.175340 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+alter table "local"."main"."phone_ppi_clean__dbt_tmp" rename to "phone_ppi_clean"
+[0m18:04:31.175541 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m18:04:31.180911 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: COMMIT
+[0m18:04:31.181049 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:31.181166 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: COMMIT
+[0m18:04:31.289512 [debug] [Thread-1 (]: SQL status: OK in 0.108 seconds
+[0m18:04:31.291741 [debug] [Thread-1 (]: Using duckdb connection "model.my_dbt_project.phone_ppi_clean"
+[0m18:04:31.291875 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: /* {"app": "dbt", "dbt_version": "1.10.15", "profile_name": "default", "target_name": "dev", "node_id": "model.my_dbt_project.phone_ppi_clean"} */
+
+      drop table if exists "local"."main"."phone_ppi_clean__dbt_backup" cascade
+    
+[0m18:04:31.292312 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m18:04:31.293226 [debug] [Thread-1 (]: On model.my_dbt_project.phone_ppi_clean: Close
+[0m18:04:31.294341 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '99062174-8d29-44ac-a388-4315865069e0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a2c4110>]}
+[0m18:04:31.294632 [info ] [Thread-1 (]: 1 of 1 OK created sql table model main.phone_ppi_clean ......................... [[32mOK[0m in 0.73s]
+[0m18:04:31.294840 [debug] [Thread-1 (]: Finished running node model.my_dbt_project.phone_ppi_clean
+[0m18:04:31.295308 [debug] [MainThread]: Using duckdb connection "master"
+[0m18:04:31.295418 [debug] [MainThread]: On master: BEGIN
+[0m18:04:31.295508 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:04:31.295684 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m18:04:31.295770 [debug] [MainThread]: On master: COMMIT
+[0m18:04:31.295856 [debug] [MainThread]: Using duckdb connection "master"
+[0m18:04:31.295935 [debug] [MainThread]: On master: COMMIT
+[0m18:04:31.296069 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m18:04:31.296155 [debug] [MainThread]: On master: Close
+[0m18:04:31.296266 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:04:31.296352 [debug] [MainThread]: Connection 'model.my_dbt_project.phone_ppi_clean' was properly closed.
+[0m18:04:31.296449 [info ] [MainThread]: 
+[0m18:04:31.296553 [info ] [MainThread]: Finished running 1 table model in 0 hours 0 minutes and 0.80 seconds (0.80s).
+[0m18:04:31.296771 [debug] [MainThread]: Command end result
+[0m18:04:31.329678 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/mark/github/CodeProjects/DBT/target/manifest.json
+[0m18:04:31.330421 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/mark/github/CodeProjects/DBT/target/semantic_manifest.json
+[0m18:04:31.332785 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/mark/github/CodeProjects/DBT/target/run_results.json
+[0m18:04:31.332887 [info ] [MainThread]: 
+[0m18:04:31.333019 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m18:04:31.333116 [info ] [MainThread]: 
+[0m18:04:31.333221 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+[0m18:04:31.336448 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 1.220887, "process_in_blocks": "0", "process_kernel_time": 0.233081, "process_mem_max_rss": "290668544", "process_out_blocks": "0", "process_user_time": 1.904351}
+[0m18:04:31.336650 [debug] [MainThread]: Command `dbt run` succeeded at 18:04:31.336613 after 1.22 seconds
+[0m18:04:31.336797 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109ebc890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109b2ecb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109b2f070>]}
+[0m18:04:31.336924 [debug] [MainThread]: Flushing usage events
+[0m18:04:31.633974 [debug] [MainThread]: An error was encountered while trying to flush usage events
