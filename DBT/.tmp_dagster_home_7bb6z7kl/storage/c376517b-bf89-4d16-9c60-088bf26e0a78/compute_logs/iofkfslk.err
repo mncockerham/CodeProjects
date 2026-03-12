@@ -1,0 +1,29 @@
+2026-03-12 18:50:57 -0400 - dagster - DEBUG - __ASSET_JOB - c376517b-bf89-4d16-9c60-088bf26e0a78 - 65025 - LOGS_CAPTURED - Started capturing logs in process (pid: 65025).
+2026-03-12 18:50:57 -0400 - dagster - DEBUG - __ASSET_JOB - c376517b-bf89-4d16-9c60-088bf26e0a78 - 65025 - duckdb_airport_table - STEP_START - Started execution of step "duckdb_airport_table".
+2026-03-12 18:50:57 -0400 - dagster - DEBUG - __ASSET_JOB - c376517b-bf89-4d16-9c60-088bf26e0a78 - duckdb_airport_table - Loading file from: /Users/mark/github/CodeProjects/DBT/.tmp_dagster_home_7bb6z7kl/storage/raw_airport_data using PickledObjectFilesystemIOManager...
+2026-03-12 18:50:57 -0400 - dagster - ERROR - __ASSET_JOB - c376517b-bf89-4d16-9c60-088bf26e0a78 - 65025 - duckdb_airport_table - STEP_FAILURE - Execution of step "duckdb_airport_table" failed.
+
+dagster._core.errors.DagsterExecutionLoadInputError: Error occurred while loading input "raw_airport_data" of step "duckdb_airport_table"::
+
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/mark/github/CodeProjects/DBT/.tmp_dagster_home_7bb6z7kl/storage/raw_airport_data'
+
+Stack Trace:
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/dagster/_core/execution/plan/utils.py", line 57, in op_execution_error_boundary
+    yield
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/dagster/_core/execution/plan/inputs.py", line 621, in _load_input_with_input_manager
+    value = input_manager.load_input(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/dagster/_core/storage/upath_io_manager.py", line 406, in load_input
+    return self._load_single_input(path, context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/dagster/_core/storage/upath_io_manager.py", line 273, in _load_single_input
+    obj = self.load_from_path(context=context, path=path)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/dagster/_core/storage/fs_io_manager.py", line 285, in load_from_path
+    with path.open("rb") as file:
+         ~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/upath/implementations/local.py", line 354, in open
+    return super().open(mode, **kwargs)  # type: ignore  # noqa: E501
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+

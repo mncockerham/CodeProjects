@@ -1,0 +1,10 @@
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - LOGS_CAPTURED - Started capturing logs in process (pid: 65927).
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - STEP_START - Started execution of step "duckdb_airport_table".
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - duckdb_airport_table - Loading file from: /Users/mark/github/CodeProjects/DBT/.tmp_dagster_home_7bb6z7kl/storage/raw_airport_data using PickledObjectFilesystemIOManager...
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - LOADED_INPUT - Loaded input "raw_airport_data" using input manager "io_manager"
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - STEP_INPUT - Got input "raw_airport_data" of type "DataFrame". (Type check passed).
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - duckdb_airport_table - Writing file at: /Users/mark/github/CodeProjects/DBT/.tmp_dagster_home_7bb6z7kl/storage/duckdb_airport_table using PickledObjectFilesystemIOManager...
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - ASSET_MATERIALIZATION - Materialized value duckdb_airport_table.
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+2026-03-12 18:55:35 -0400 - dagster - DEBUG - __ASSET_JOB - d23f3660-afbb-423f-bffb-b9415742c111 - 65927 - duckdb_airport_table - STEP_SUCCESS - Finished execution of step "duckdb_airport_table" in 94ms.

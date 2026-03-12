@@ -1,0 +1,60 @@
+# DBT Learning Plan
+*(Tailored for a Data Engineer with Airflow & Database Experience)*
+
+## Goal: "I Know dbt" (Interview Ready)
+
+Since you already have extensive database experience and Airflow orchestration knowledge, you have a massive head start. You don't need to learn SQL, data modeling concepts, or how DAGs work. You just need to learn **how dbt handles these concepts**. 
+
+This plan leverages what you already know to fast-track your dbt expertise.
+
+---
+
+### Phase 1: Core dbt Principles (The "T" in ELT)
+*Focus: Translating your SQL DDL/DML knowledge into dbt's paradigm.*
+
+*   **Understanding the Paradigm Shift:** In dbt, you write `SELECT` statements, and dbt compiles and wraps them in `CREATE TABLE/VIEW` statements. You never write DDL again.
+*   **Models & Materializations:** 
+    *   Learn how to configure materializations (`view`, `table`, `ephemeral`, `incremental`).
+    *   *Action:* Convert 2-3 of your raw postgres queries into dbt `view` models. Try changing one to a `table` materialization.
+*   **The Dependency Graph (DAG):**
+    *   Learn the `{{ ref('model_name') }}` and `{{ source('source_name', 'table_name') }}` macros. This is how dbt infers dependencies, exactly like Airflow task dependencies.
+    *   *Action:* Complete your `sources.yml` for `postgres_air` and update `phone_ppi_clean.sql` to use `{{ source() }}` instead of a hardcoded DuckDB scan.
+
+### Phase 2: Advanced Jinja & Macros
+*Focus: You already know Jinja from Airflow templates; now apply it to SQL.*
+
+*   **Jinja for DRY Code:** Learn how to inject Python-like logic (for-loops, if-statements) directly into SQL.
+*   **Writing Macros:** Functions in dbt are called macros. They allow you to reuse complex SQL chunks (e.g., standardizing timezone conversions or generating dynamic pivots).
+*   **Packages:** Learn how to use `dbt_packages` (like `dbt-utils` or `dbt-expectations`). It's like `pip install` but for dbt macros.
+*   *Action:* Write a custom macro to encrypt PII (like the `sha256` you used earlier) so it can be applied to any column across the project simply by calling `{{ hash_pii('email_column') }}`.
+
+### Phase 3: Testing & Documentation (Production Grade)
+*Focus: What separates a junior dbt user from a senior dbt user.*
+
+*   **Generic Tests:** Configure standard tests (`unique`, `not_null`, `accepted_values`, `relationships`) directly in `.yml` files.
+*   **Singular Tests:** Write custom SQL queries that assert specific business logic (if the query returns rows, the test fails).
+*   **Generating Documentation:** Learn the `dbt docs generate` and `dbt docs serve` commands. See how dbt auto-generates data dictionaries and lineage graphs.
+*   *Action:* Add `unique` and `not_null` tests to your `phone` table model. Run `dbt test` to prove it works.
+
+### Phase 4: Performance & Incremental Logic
+*Focus: Database optimization.*
+
+*   **Incremental Models:** This is critical for large datasets. Learn how to process only *new* data using the `is_incremental()` macro. This maps perfectly to how you likely batch process data with Airflow execution dates.
+*   **Snapshots (SCD Type 2):** Learn how dbt handles Slowly Changing Dimensions out-of-the-box using the `dbt snapshot` command. 
+*   *Action:* Create an incremental model that only processes new phone records updated since the last run.
+
+### Phase 5: Airflow Integration (Your Superpower)
+*Focus: Bridging your existing skills with your new ones.*
+
+*   **The Orchestration Layer:** Since dbt doesn't schedule itself, it relies on Airflow. 
+*   **Methods of Integration:**
+    1.  *Basic:* `BashOperator` running `dbt run`.
+    2.  *Advanced (Industry Standard):* **Astronomer Cosmos**. This Python library reads your dbt `manifest.json` and perfectly maps every dbt model to its own native Airflow Task in an Airflow DAG.
+*   *Action:* You already spun up Dagster locally, which operates similarly. If you ever spin up local Airflow, use Cosmos to orchestrate your `dagster_postgres_air` dbt project.
+
+---
+
+### Resources for Execution
+1.  **dbt Fundamentals (Free Certification):** The official dbt Labs free online course. Highly recommended even just to skim, as it teaches the official "dbt way" of structuring projects.
+2.  **dbt Discourse & Slack:** The community is massive and extremely helpful.
+3.  **Your Local Playground:** Continue using this DuckDB + Postgres setup. It's the perfect isolated, risk-free environment to test incremental logic and macros.

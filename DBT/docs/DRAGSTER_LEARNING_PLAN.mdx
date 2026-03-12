@@ -1,0 +1,65 @@
+# Dagster Learning Plan
+*(Tailored for a Data Engineer with Airflow Experience)*
+
+## Goal: "I Know Dagster" (Interview Ready)
+
+Since you already know Apache Airflow, you understand the core concepts of data orchestration (DAGs, dependencies, scheduling, retries, and execution). Your learning curve for Dagster will be mostly about a **paradigm shift** from *Task-Based* orchestration to *Asset-Based* orchestration.
+
+This plan is designed to help you quickly map your Airflow knowledge to Dagster's concepts and understand why modern data stacks are adopting it.
+
+---
+
+### Phase 1: The Great Paradigm Shift (Tasks vs. Assets)
+*Focus: Rewiring how you think about pipelines.*
+
+*   **Airflow (Imperative/Task-Based):** "Run `Extract_Task`, then run `Transform_Task`." Airflow cares about *actions*.
+*   **Dagster (Declarative/Asset-Based):** "I want this `users_table` to exist. To make it exist, it depends on `raw_events`." Dagster cares about *state* and the data itself (Software-Defined Assets - SDAs).
+*   **The UI Difference:** In Airflow, you monitor tasks. In Dagster, the UI shows you the physical tables/files and their status.
+*   *Action:* In your local `dagster_postgres_air` project UI, look at the **Assets** tab. Notice how it shows the table name (`phone_ppi_clean`) rather than a script name.
+
+### Phase 2: Core Dagster Concepts mapped to Airflow
+*Focus: Learning the equivalent terminology and APIs.*
+
+*   **@asset vs @task:** 
+    *   Learn how to write a Python function decorated with `@asset`. 
+    *   Understand how to define dependencies by simply passing another asset as an argument to your function.
+*   **Jobs vs DAGs:** 
+    *   In Dagster, a `Job` is a collection of assets that you run together (akin to an Airflow DAG).
+*   **Ops / Graphs:** 
+    *   For tasks that don't produce a tangible data asset (like sending a Slack alert), Dagster has `@op` (operations), which are almost identical to standard Airflow tasks.
+*   *Action:* Write a simple Python `@asset` in your Dagster project that creates a dummy string, and a second `@asset` that takes the first as an input.
+
+### Phase 3: Passing Data (XComs vs. I/O Managers)
+*Focus: How Dagster elegantly solves one of Airflow's biggest headaches.*
+
+*   **The Airflow Way:** XComs are clunky, rely on a metadata database, and aren't meant for large datasets. You usually write to S3, then pass the S3 path via XCom to the next task.
+*   **The Dagster Way (I/O Managers):** Dagster handles reading and writing data *automatically*. If Asset A returns a Pandas DataFrame, and Asset B needs it, Dagster's **I/O Manager** will automatically serialize that dataframe to storage (like S3 or local disk), and deserialize it when injecting it into Asset B. You never write `df.to_csv()` or `boto3.upload()` boilerplate.
+*   *Action:* Read the Dagster docs on I/O Managers. Understand how returning an object from an `@asset` function magically persists it.
+
+### Phase 4: Integrations (The dbt Sweet Spot)
+*Focus: Why people love Dagster specifically for dbt.*
+
+*   **The Concept:** Rather than treating `dbt run` as a single black-box bash command (like Airflow's `BashOperator`), the `dagster-dbt` integration parses your dbt `manifest.json`.
+*   **The Result:** Dagster turns every single dbt model, seed, and snapshot into its own Software-Defined Asset natively in the UI. You get instant, deep lineage spanning from your Python extraction scripts straight through to your final dbt models.
+*   *Action:* You've already scaffolded this in your project! Explore your existing Dagster UI and see how it natively understands your dbt model.
+
+### Phase 5: Scheduling and Events
+*Focus: Triggering runs.*
+
+*   **Schedules (cron):** Mapping standard Airflow cron scheduling (`schedule_interval`) to Dagster Schedules.
+*   **Sensors:** Mapping Airflow Sensors (e.g., S3KeySensor) to Dagster Sensors. Dagster sensors are often praised for being more robust and event-driven.
+*   **Auto-Materialization (Declarative Scheduling):** This is a unique Dagster feature. You can tell Dagster "keep this asset up-to-date," and it will automatically figure out when to run it based on upstream changes, without explicitly writing a cron schedule.
+*   *Action:* Add a basic daily `ScheduleDefinition` to your dbt assets in `definitions.py`.
+
+### Phase 6: Resources and Deployment
+*Focus: Managing connections and environments.*
+
+*   **Resources (Airflow Connections):** Learn how Dagster passes database credentials, dbt CLI configurations, or API keys to assets using `Resources`. (e.g., `DbtCliResource` which is already in your `definitions.py`).
+*   **Deployment:** Understand how Dagster separates User Code deployments from the Webserver/Daemon components (similar to Airflow's Webserver/Scheduler/Worker separation).
+
+---
+
+### Resources for Execution
+1.  **Dagster University (Free):** Dagster has phenomenal, free, hands-on courses designed around building a real data pipeline pulling from an API.
+2.  **Dagster Documentation:** Specifically the "Concepts" section regarding Software-Defined Assets.
+3.  **Your Local Playground:** Your `dagster_postgres_air` project is already perfectly wired up. Start adding Python `@asset` functions next to your dbt assets!

@@ -1,0 +1,7 @@
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - 65872 - LOGS_CAPTURED - Started capturing logs in process (pid: 65872).
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - 65872 - raw_airport_data - STEP_START - Started execution of step "raw_airport_data".
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - 65872 - raw_airport_data - STEP_OUTPUT - Yielded output "result" of type "DataFrame". (Type check passed).
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - raw_airport_data - Writing file at: /Users/mark/github/CodeProjects/DBT/.tmp_dagster_home_7bb6z7kl/storage/raw_airport_data using PickledObjectFilesystemIOManager...
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - 65872 - raw_airport_data - ASSET_MATERIALIZATION - Materialized value raw_airport_data.
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - 65872 - raw_airport_data - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+2026-03-12 18:55:20 -0400 - dagster - DEBUG - __ASSET_JOB - b91a5b49-9c44-4d4a-b431-f3f18b437f27 - 65872 - raw_airport_data - STEP_SUCCESS - Finished execution of step "raw_airport_data" in 96ms.

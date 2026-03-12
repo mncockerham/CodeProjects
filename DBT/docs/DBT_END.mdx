@@ -1,0 +1,16 @@
+# Stop DBT & Dagster Environment
+
+Follow these steps to completely shut down your data orchestration environment and free up Mac resources when doing other activities.
+
+## 1. Stop Dagster Server
+- Go to your Mac terminal window where `dagster dev` is currently running.
+- Press `Ctrl + C` on your keyboard to terminate the Dagster webserver.
+- Wait a few seconds for the background processes (AssetDaemon, Scheduler, etc.) to gracefully shut down.
+
+## 2. Stop PostgreSQL App
+- Click on the **elephant icon** in your Mac's top menu bar (from Postgres.app).
+- Click **Stop** to shut down the database server and free up CPU/Memory.
+- (Alternatively, you can click "Quit" if you don't even want the elephant icon sitting on your menu bar).
+
+## 3. Close the Terminal Window
+- The Dagster python process uses a bit of memory. When you are totally finished with your DBT development session, simply closing the active terminal sessions guarantees no rogue processes are left hanging.

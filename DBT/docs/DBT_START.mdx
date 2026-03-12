@@ -1,0 +1,29 @@
+# Start DBT & Dagster Environment
+
+Follow these steps to spin up your local environment after a computer restart.
+
+## 1. Start PostgreSQL
+Make sure your local PostgreSQL database is running. You are testing against the `postgres_air` sample database.
+- Open **Postgres.app** from your Mac's Applications folder (or the Launchpad).
+- It will appear as an elephant icon in your top menu bar. Ensure the server is started and running on port `5432`.
+
+## 2. Verify DBT (Optional manual run)
+Your DBT project queries PostgreSQL and loads the output into a local DuckDB file (`local.duckdb`).
+To manually run the pipeline from the command line to verify connections:
+```bash
+cd /Users/mark/github/CodeProjects/DBT
+/Library/Frameworks/Python.framework/Versions/3.13/bin/dbt run --profiles-dir .
+```
+
+## 3. Spin up Dagster (Visual Orchestrator)
+To start the Dagster UI and manage your DBT models in the browser:
+```bash
+cd /Users/mark/github/CodeProjects/dagster_postgres_air
+/Library/Frameworks/Python.framework/Versions/3.13/bin/dagster dev
+```
+
+## 4. Access the UI
+Once the terminal logs say "Serving dagster-webserver", open your web browser and go to:
+**[http://127.0.0.1:3000](http://127.0.0.1:3000)**
+
+You can view and materialize your `phone_ppi_clean` DBT model directly under the **Assets** tab on the left.

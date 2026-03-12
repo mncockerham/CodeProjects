@@ -1,0 +1,41 @@
+# AI Learning Summary
+
+This document captures the state of Mark's learning journey across the modern data stack (dbt, Dagster, DuckDB, PostgreSQL), their background, questions asked, and areas to focus on moving forward. It serves as context for the AI assistant across sessions.
+
+## 🧑‍💻 User Context
+*   **Background:** Experienced Data Engineer with strong knowledge of Apache Airflow, standard SQL, and relational databases.
+*   **Current Stack Setup:**
+    *   **OS:** macOS
+    *   **Local Database:** PostgreSQL (using Postgres.app)
+    *   **Data Warehouse (Testing):** DuckDB file (`local.duckdb`)
+    *   **Transform Layer:** dbt (version 1.10.15)
+    *   **Extract/Load/Orchestrate Layer:** Dagster (version 1.12.19, running locally)
+    *   **Python:** 3.13 (using Pandas 3.0 & PyArrow)
+*   **Goal:** Reach "interview-ready" proficiency in both dbt and Dagster to add to their data engineering toolkit.
+
+## 🛠️ Environment State
+*   **PostgreSQL:** `postgres_air` sample database has been recreated and successfully restored. Created user without a password for easier local testing.
+*   **dbt:** Project is fully scaffolded. We have two models testing functionality:
+    1.  `phone_ppi_clean`: Tests the `postgres_scan()` direct extension inside DuckDB.
+    2.  `airport_summary`: Tests standard dbt aggregation after Dagster handles the data loading.
+*   **Dagster:** A `dagster_postgres_air` project is initialized. We created a separate Python environment (`dragster/assets.py`) that successfully extracts data `from postgres_air.airport` and loads it into a DuckDB table using Pandas and PyArrow.
+
+## 🧠 Core Concepts Explored
+We focused heavily on the **Paradigm Shift** from Airflow to Dagster/dbt:
+1.  **Transform vs ELT:** Established that dbt only handles the **"T" (Transform)**. It compiles SQL SELECTs into physical materializations (Tables/Views). For tasks like `COPY` or `UNLOAD`, separate ingestion tools or Python operators inside orchestrators should be used.
+2.  **Tasks vs Assets:** Contrasted Airflow's "Task-based" orchestration (running scripts) with Dagster's declarative "Asset-based" orchestration (guaranteeing physical state). 
+3.  **The "Materialize" Concept:** Discussed why "Materialize" is used instead of "Run." While running a python script just executes code, telling Dagster to "Materialize" triggers built-in metadata tracking (rows affected, column schemas, execution time) and draws visual lineage natively without custom boilerplate code.
+4.  **I/O Managers:** Discussed how Dagster's Asset system eliminates the need for clunky Airflow XComs by automatically serializing/deserializing Pandas DataFrames to the disk between execution steps.
+
+## 🤔 Key Questions Addressed
+*   *How is dbt usually scheduled?* -> Usually via Data Orchestrators (Airflow/Dagster), dbt Cloud, or CI/CD pipelines.
+*   *Do Dagster or Prefect have free Mac installs?* -> Yes, both run highly capable local UI servers using standard `pip` installs and local SQLite states. We installed Dagster natively.
+*   *Is "Materialized" just a fancy way of saying run?* -> It triggers a run (`dbt build`), but functionally guarantees the *state* of the data asset and collects native observability metadata, whereas a "run" in Airflow simply triggers a script that may or may not succeed conceptually.
+*   *Does dbt support COPY/UNLOAD commands?* -> No, that is the Extracts/Loads portion (Airbyte, Fivetran, Python extractors). dbt expects the data to already be loaded. We successfully modeled an ELT pipeline using Dagster to extract/load into DuckDB, with dbt acting purely as the T aggregator.
+
+## 🚀 Next Steps (Action Items based on Learning Plans)
+*   [ ] **dbt DAG Integration:** Connect the newly loaded Dagster `duckdb_airport_table` physical table to the dbt `airport_summary` model formally so they render as a single graph inside the Dagster UI (combining python files and definitions).
+*   [ ] **dbt Sources:** Replace the hardcoded `postgres_scan()` DuckDB macro in models by finishing the setup of the `sources.yml` file.
+*   [ ] **Jinja Macros:** Practice writing a Jinja macro (e.g., standard phone encryption) inside dbt to replicate Airflow Jinja logic.
+*   [ ] **Testing:** Add `unique` and `not_null` schema configurations to the dbt YAML files to see Dagster intercept bad data.
+*   [ ] **Dagster Schedules:** Move from manually clicking "Materialize" to setting up declarative Dagster Sensors or interval schedules.
