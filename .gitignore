@@ -24,3 +24,10 @@ logs/
 # general
 *.log
 .DS_Store
+
+# duckdb databases
+*.duckdb
+
+# dbt user telemetry
+.user.yml
+
