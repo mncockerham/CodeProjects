@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > **AI Consumption Notice:** This document is explicitly written and maintained to aid AI coding assistants in working with Mark. Its primary purpose is to provide persistent context, define the current technical stack boundaries, and focus all AI interactions. It is not necessarily formatted for human readability or traditional documentation standards.
 
-## 🧑‍💻 User Context
+## USER_CONTEXT
 *   **Background:** Experienced Data Engineer with strong knowledge of Apache Airflow, standard SQL, and relational databases.
 *   **Current Stack Setup:**
     *   **OS:** macOS
@@ -16,7 +16,7 @@
     *   **Python:** 3.13 (using Pandas 3.0 & PyArrow)
 *   **Goal:** Reach "interview-ready" proficiency in both dbt and Dagster to add to their data engineering toolkit.
 
-## 🛠️ Environment State
+## ENVIRONMENT_STATE
 *   **PostgreSQL:** `postgres_air` sample database has been recreated and successfully restored. Created user without a password for easier local testing.
 *   **dbt:** Project is fully scaffolded. We have two models testing functionality:
     1.  `phone_ppi_clean`: Tests the `postgres_scan()` direct extension inside DuckDB.
@@ -25,14 +25,14 @@
 *   **Apache Iceberg:** Configured a local setup simulating a production data lake. Code is version-controlled in `CodeProjects/Iceberg`, while the SQLite catalog and Parquet warehouse data are stored outside Git (`~/LocalData/Iceberg`) to avoid repository bloat and macOS iCloud sync issues.
 *   **Data Visualization (Superset & DBeaver):** Documented architecture to query local Postgres, DuckDB, and Iceberg files. DBeaver connects directly to DuckDB to read Iceberg tables (`iceberg_scan()`), and Superset will utilize DuckDB as an engine to power virtual datasets over the Iceberg Parquet files.
 
-## 💻 Environment Portability (Multi-Machine Setup)
-*Mark clones this repository across multiple Mac computers. When initializing on a new machine, be aware of the following bootstrap requirements:*
+## ENVIRONMENT_PORTABILITY_REQUIREMENTS
+*Context for multi-machine cloning operations:*
 1.  **DuckDB State:** `local.duckdb` is a binary file and should be excluded from Git via `.gitignore`. The database will not exist on a fresh clone and must be rebuilt by running the Dagster assets first.
 2.  **Postgres State:** The new machine must have Postgres installed (via Postgres.app or Homebrew) and the `postgres_air` sample schema manually restored, as that data lives outside the Git repository.
 3.  **Python Environment:** Dependencies (`dbt-duckdb`, `dagster`, `pandas`, etc.) must be reinstalled. Ensure a `requirements.txt` is maintained and a fresh virtual environment is sourced upon cloning.
 4.  **dbt Profiles:** Check `~/.dbt/profiles.yml`. Because this file lives in the `.dbt` folder in the user's home directory (by default), it does not sync with the Git repo. It must be recreated or symlinked on the new machine.
 
-## 🧠 Core Concepts Explored
+## CORE_CONCEPTS_EXPLORED
 We focused heavily on the **Paradigm Shift** from Airflow to Dagster/dbt:
 1.  **Transform vs ELT:** Established that dbt only handles the **"T" (Transform)**. It compiles SQL SELECTs into physical materializations (Tables/Views). For tasks like `COPY` or `UNLOAD`, separate ingestion tools or Python operators inside orchestrators should be used.
 2.  **Tasks vs Assets:** Contrasted Airflow's "Task-based" orchestration (running scripts) with Dagster's declarative "Asset-based" orchestration (guaranteeing physical state). 
@@ -40,19 +40,19 @@ We focused heavily on the **Paradigm Shift** from Airflow to Dagster/dbt:
 4.  **I/O Managers:** Discussed how Dagster's Asset system eliminates the need for clunky Airflow XComs by automatically serializing/deserializing Pandas DataFrames to the disk between execution steps.
 5.  **Open Table Formats (Iceberg):** Explored how Iceberg separates compute from storage, managing metadata (snapshots, schemas) independent of the physical `.parquet` files, allowing engines like DuckDB to query data lake folders synchronously.
 
-## 🤔 Key Questions Addressed
+## KEY_QUESTIONS_ADDRESSED
 *   *How is dbt usually scheduled?* -> Usually via Data Orchestrators (Airflow/Dagster), dbt Cloud, or CI/CD pipelines.
 *   *Do Dagster or Prefect have free Mac installs?* -> Yes, both run highly capable local UI servers using standard `pip` installs and local SQLite states. We installed Dagster natively.
 *   *Is "Materialized" just a fancy way of saying run?* -> It triggers a run (`dbt build`), but functionally guarantees the *state* of the data asset and collects native observability metadata, whereas a "run" in Airflow simply triggers a script that may or may not succeed conceptually.
 *   *Does dbt support COPY/UNLOAD commands?* -> No, that is the Extracts/Loads portion (Airbyte, Fivetran, Python extractors). dbt expects the data to already be loaded. We successfully modeled an ELT pipeline using Dagster to extract/load into DuckDB, with dbt acting purely as the T aggregator.
 
-## 🏛️ Advanced Architecture Discussions
+## ADVANCED_ARCHITECTURE_DISCUSSIONS
 *   **The Replacement of Stored Procedures:** Avoid using dbt to manage Stored Procedures. Abstract logic into Jinja Macros (e.g., custom partition swapping logic) that write declarative SQL for you.
 *   **Separation of Concerns:** Keep core infrastructure (UDFs, Roles, Warehouses) managed by specialized tools like Terraform. dbt should assume the sandbox exists and strictly handle the data transformations.
 *   **Zero-Downtime Deployments:** Instead of standard CTAS overrides, Enterprise dbt environments leverage Orchestrators to run `dbt build` against a hidden staging schema, run `dbt test`, and only perform an atomic Schema Swap into production if tests pass.
 *   **Model Config Superpowers:** The `{{ config() }}` block eliminates the need for manual DDL. It natively handles Grants/Roles, Sort/Dist Keys (Redshift), Clustering (Snowflake), and advanced Partial/Functional indexing (Postgres). 
 *   **Enterprise Scaling Features:** dbt isn't just a SQL compiler. The primary ROI drivers are *Slim CI Deployments* (only testing the blast radius of a change using Stateful execution), *Auto-generating Data Catalogs* linking `.yml` comments to live code, and *Package Managers* (dbt Hub) to share common analytic functions across the industry.
-## 🚀 Next Steps (Action Items based on Learning Plans)
+## PENDING_ACTION_ITEMS
 *   [ ] **dbt DAG Integration:** Connect the newly loaded Dagster `duckdb_airport_table` physical table to the dbt `airport_summary` model formally so they render as a single graph inside the Dagster UI (combining python files and definitions).
 *   [ ] **dbt Sources:** Replace the hardcoded `postgres_scan()` DuckDB macro in models by finishing the setup of the `sources.yml` file.
 *   [ ] **Jinja Macros:** Practice writing a Jinja macro (e.g., standard phone encryption) inside dbt to replicate Airflow Jinja logic.
@@ -60,24 +60,23 @@ We focused heavily on the **Paradigm Shift** from Airflow to Dagster/dbt:
 *   [ ] **Dagster Schedules:** Move from manually clicking "Materialize" to setting up declarative Dagster Sensors or interval schedules.
 *   [ ] **Iceberg & Superset:** Connect Superset locally to the generated Iceberg sample tables via DuckDB and build a sample dashboard.
 
-## 🧑‍💼 User Persona & AI Prompting Context
-
-**Mark Cockerham** | Principle Data Architect & Senior Data Engineer
+## SYSTEM_PROMPT_CONTEXT
+**User Profile:** Mark Cockerham | Principle Data Architect & Senior Data Engineer
 
 *This section serves as a direct system-level prompt for the AI to tailor its responses, analogies, and learning plans.*
 
-### 🎯 AI Targeting Instructions:
+### INSTRUCTIONS_FOR_AI:
 *   **Tone & Expertise Level:** Target explanations at a Senior/Principal Architect level. Assume deep, 15+ year expertise in SQL, database internals, and classical ETL. **Do not explain basic database concepts.**
 *   **Mental Models:** When introducing modern data stack tools (like dbt, Dagster, or DuckDB), bridge the gap by comparing them to classical tools (SSIS, Stored Procedures) or orchestrators you know well (Apache Airflow).
 *   **Focus Areas:** Emphasize paradigm shifts (e.g., declarative vs. imperative, ELT vs. ETL, asset-based vs. task-based operations), scalability (Terabyte scale), computational efficiency, and architectural governance.
 
-### 🛠️ Core Technical Proficiencies:
+### CORE_TECHNICAL_PROFICIENCIES:
 *   **Modern Cloud & Orchestration:** Snowflake, Redshift, Apache Airflow, dbt, Dagster.
 *   **Relational & MPP Databases:** SQL Server (Deep DBA/T-SQL expertise), MySQL, PostgreSQL, Vertica.
 *   **Data Architecture:** High-volume data modeling (Terabyte scale, tracking billions of rows), compute cost-optimization, PII compliance, and Data Lineage handling.
 *   **Legacy BI & ETL:** SSIS, SSRS, SSAS, Tableau, R/Shiny.
 
-### 🏢 Career Trajectory Summary:
+### CAREER_TRAJECTORY_SUMMARY:
 *   **Current:** *Principle Data Architect at Arch Insurance* (Driving Snowflake architecture, governance, Snowflake compute optimization, and technical training).
 *   **Gaming Analytics (9 Years):** *Data Engineer at PopCap Games / EA* (Built massive scalable reporting environments in Snowflake/Vertica/Redshift tracking 4M+ daily users, migrated legacy pipelines to Airflow).
 *   **Enterprise Foundation:** *Consultant/Developer for Microsoft, Boeing, Chevron, Washington Mutual* (Deep roots in SQL Server, SSIS, automated data extraction, and classical Enterprise Data Warehousing).
