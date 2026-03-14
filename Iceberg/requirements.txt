@@ -1,0 +1,3 @@
+pyiceberg[duckdb,pyarrow,sql-sqlite]
+duckdb
+pyarrow
