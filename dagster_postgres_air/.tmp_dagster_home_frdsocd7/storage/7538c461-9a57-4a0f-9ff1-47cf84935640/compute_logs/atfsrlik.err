@@ -1,9 +1,0 @@
-2026-03-12 18:34:18 -0400 - dagster - DEBUG - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - 62021 - LOGS_CAPTURED - Started capturing logs in process (pid: 62021).
-2026-03-12 18:34:18 -0400 - dagster - DEBUG - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - 62021 - my_dbt_project_dbt_assets - STEP_START - Started execution of step "my_dbt_project_dbt_assets".
-2026-03-12 18:34:18 -0400 - dagster - INFO - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - my_dbt_project_dbt_assets - A dbt subsetted execution is not being performed. Using the default dbt selection arguments `['--select', 'fqn:*']`.
-2026-03-12 18:34:20 -0400 - dagster - INFO - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - my_dbt_project_dbt_assets - Copying `/Users/mark/github/CodeProjects/DBT/target/partial_parse.msgpack` to `/Users/mark/github/CodeProjects/DBT/target/my_dbt_project_dbt_assets-7538c46-b5924ad/partial_parse.msgpack` to take advantage of partial parsing.
-2026-03-12 18:34:20 -0400 - dagster - INFO - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - my_dbt_project_dbt_assets - Running dbt command: `dbt build --select fqn:*`.
-2026-03-12 18:34:21 -0400 - dagster - DEBUG - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - 62021 - my_dbt_project_dbt_assets - STEP_OUTPUT - Yielded output "phone_ppi_clean" of type "Nothing". (Type check passed).
-2026-03-12 18:34:21 -0400 - dagster - DEBUG - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - 62021 - my_dbt_project_dbt_assets - ASSET_MATERIALIZATION - Materialized value phone_ppi_clean.
-2026-03-12 18:34:21 -0400 - dagster - INFO - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - my_dbt_project_dbt_assets - Finished dbt command: `dbt build --select fqn:*`.
-2026-03-12 18:34:21 -0400 - dagster - DEBUG - __ASSET_JOB - 7538c461-9a57-4a0f-9ff1-47cf84935640 - 62021 - my_dbt_project_dbt_assets - STEP_SUCCESS - Finished execution of step "my_dbt_project_dbt_assets" in 2.66s.

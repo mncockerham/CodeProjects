@@ -1,0 +1,26 @@
+# python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.env
+
+# dagster
+.tmp_dagster_home_*/
+history/
+storage/
+runs/
+*.db
+*.db-shm
+*.db-wal
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# general
+*.log
+.DS_Store
