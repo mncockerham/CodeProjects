@@ -8,8 +8,10 @@ This document captures the state of Mark's learning journey across the modern da
     *   **OS:** macOS
     *   **Local Database:** PostgreSQL (using Postgres.app)
     *   **Data Warehouse (Testing):** DuckDB file (`local.duckdb`)
+    *   **Table Format:** Apache Iceberg (local catalog via PyIceberg/SQLite)
     *   **Transform Layer:** dbt (version 1.10.15)
     *   **Extract/Load/Orchestrate Layer:** Dagster (version 1.12.19, running locally)
+    *   **Data Visualization:** Apache Superset / DBeaver (IDE)
     *   **Python:** 3.13 (using Pandas 3.0 & PyArrow)
 *   **Goal:** Reach "interview-ready" proficiency in both dbt and Dagster to add to their data engineering toolkit.
 
@@ -19,6 +21,8 @@ This document captures the state of Mark's learning journey across the modern da
     1.  `phone_ppi_clean`: Tests the `postgres_scan()` direct extension inside DuckDB.
     2.  `airport_summary`: Tests standard dbt aggregation after Dagster handles the data loading.
 *   **Dagster:** A `dagster_postgres_air` project is initialized. We created a separate Python environment (`dragster/assets.py`) that successfully extracts data `from postgres_air.airport` and loads it into a DuckDB table using Pandas and PyArrow.
+*   **Apache Iceberg:** Configured a local setup simulating a production data lake. Code is version-controlled in `CodeProjects/Iceberg`, while the SQLite catalog and Parquet warehouse data are stored outside Git (`~/LocalData/Iceberg`) to avoid repository bloat and macOS iCloud sync issues.
+*   **Data Visualization (Superset & DBeaver):** Documented architecture to query local Postgres, DuckDB, and Iceberg files. DBeaver connects directly to DuckDB to read Iceberg tables (`iceberg_scan()`), and Superset will utilize DuckDB as an engine to power virtual datasets over the Iceberg Parquet files.
 
 ## 💻 Environment Portability (Multi-Machine Setup)
 *Mark clones this repository across multiple Mac computers. When initializing on a new machine, be aware of the following bootstrap requirements:*
@@ -33,6 +37,7 @@ We focused heavily on the **Paradigm Shift** from Airflow to Dagster/dbt:
 2.  **Tasks vs Assets:** Contrasted Airflow's "Task-based" orchestration (running scripts) with Dagster's declarative "Asset-based" orchestration (guaranteeing physical state). 
 3.  **The "Materialize" Concept:** Discussed why "Materialize" is used instead of "Run." While running a python script just executes code, telling Dagster to "Materialize" triggers built-in metadata tracking (rows affected, column schemas, execution time) and draws visual lineage natively without custom boilerplate code.
 4.  **I/O Managers:** Discussed how Dagster's Asset system eliminates the need for clunky Airflow XComs by automatically serializing/deserializing Pandas DataFrames to the disk between execution steps.
+5.  **Open Table Formats (Iceberg):** Explored how Iceberg separates compute from storage, managing metadata (snapshots, schemas) independent of the physical `.parquet` files, allowing engines like DuckDB to query data lake folders synchronously.
 
 ## 🤔 Key Questions Addressed
 *   *How is dbt usually scheduled?* -> Usually via Data Orchestrators (Airflow/Dagster), dbt Cloud, or CI/CD pipelines.
@@ -52,6 +57,7 @@ We focused heavily on the **Paradigm Shift** from Airflow to Dagster/dbt:
 *   [ ] **Jinja Macros:** Practice writing a Jinja macro (e.g., standard phone encryption) inside dbt to replicate Airflow Jinja logic.
 *   [ ] **Testing:** Add `unique` and `not_null` schema configurations to the dbt YAML files to see Dagster intercept bad data.
 *   [ ] **Dagster Schedules:** Move from manually clicking "Materialize" to setting up declarative Dagster Sensors or interval schedules.
+*   [ ] **Iceberg & Superset:** Connect Superset locally to the generated Iceberg sample tables via DuckDB and build a sample dashboard.
 
 ## 🧑‍💼 User Persona & AI Prompting Context
 
