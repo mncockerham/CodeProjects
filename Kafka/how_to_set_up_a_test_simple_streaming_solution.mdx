@@ -1,0 +1,134 @@
+# Simple Kafka Streaming Pipeline (File Landing Pattern)
+
+This guide walks through a visible, inspectable pipeline:
+1. **Producer:** Simulates clickstream events and pushes them to a Kafka Topic.
+2. **Consumer:** Reads that stream and actively writes the events into local `JSON Lines (JSONL)` files. 
+3. **DuckDB:** Later, DuckDB will process the resulting physical files directly from the filesystem.
+
+> [!TIP]
+> **Data Lake Antipatterns to Avoid**
+> In our initial iteration, we had the Consumer inserting data directly into a DuckDB file. While possible, this hides the raw data inside the `.duckdb` binary before you've even inspected it. A much better standard ELT pattern is having the Consumer purely land the raw JSON files (E/L), and using DuckDB or dbt solely for querying/transforming those files (T).
+
+## 1. Environment Setup
+
+Install the Python client for Kafka:
+
+```bash
+pip install confluent-kafka
+```
+
+## 2. The Producer: Simulating the Data Source (`producer.py`)
+
+This script generates events and writes them to the broker. The broker receives them and writes them to its binary data directory (which we identified in the installation guide). 
+
+```python
+import json
+import time
+import random
+from datetime import datetime
+from confluent_kafka import Producer
+
+producer = Producer({'bootstrap.servers': 'localhost:9092'})
+
+def delivery_report(err, msg):
+    """Callback triggered once for each message to confirm it hit the broker's disk."""
+    if err:
+        print(f'💥 Delivery failed: {err}')
+    else:
+        print(f'✅ Delivered to partition [{msg.partition()}] at offset {msg.offset()}')
+
+try:
+    print("Producing mock event data... (Press Ctrl+C to stop)")
+    while True:
+        event = {
+            "user_id": random.randint(100, 999),
+            "action": random.choice(["click", "scroll", "add_to_cart"]),
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        # We enforce "utf-8" string encodings when pushing to the broker
+        producer.produce('user_clicks', value=json.dumps(event).encode('utf-8'), callback=delivery_report)
+        producer.poll(0)
+        time.sleep(1) # Slowing it down so you can read the terminal
+except KeyboardInterrupt:
+    pass
+finally:
+    producer.flush() # Forces any buffered messages out before exit
+```
+
+## 3. The Consumer: File-Based Data Landing (`consumer.py`)
+
+This consumer explicitly writes the stream out to a local folder instead of abstracting it via an active database connection. Because we keep intermediate states explicitly visible on the disk, **you no longer have a black box integration**.
+
+```python
+import json
+import os
+from confluent_kafka import Consumer, KafkaError
+
+# 1. Create an explicitly visible landing zone
+OUTPUT_DIR = "raw_landing_zone"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+FILE_PATH = os.path.join(OUTPUT_DIR, "clicks.jsonl")
+
+# 2. Configure Consumer
+consumer = Consumer({
+    'bootstrap.servers': 'localhost:9092',
+    'group.id': 'file-landing-consumer', # Crucial: Tracks where this consumer left off
+    'auto.offset.reset': 'earliest'      # Process from the start if no history 
+})
+consumer.subscribe(['user_clicks'])
+
+print(f"Consumer listening... Landing RAW Kafka events directly into: ./{FILE_PATH}")
+
+try:
+    # Open our file in text-append mode. 
+    # In a real architecture, you'd roll to a new file every N minutes or N Megabytes 
+    # (e.g., clicks_partition_0_20260315_1200.jsonl)
+    with open(FILE_PATH, 'a') as f:
+        while True:
+            # Poll for messages every 1.0 seconds
+            msg = consumer.poll(1.0)
+            
+            if msg is None: continue
+            if msg.error():
+                if msg.error().code() != KafkaError._PARTITION_EOF:
+                    print(msg.error())
+                continue
+            
+            # 3. Read raw bytes from Kafka and decode back to a JSON String
+            raw_json_str = msg.value().decode('utf-8')
+            
+            # 4. Write string plus a newline directly to the local disk file
+            f.write(raw_json_str + "\n")
+            f.flush() # Force write to disk so we can literally see it update live in an IDE
+            
+            print(f"Landed raw event to file: {raw_json_str}")
+
+except KeyboardInterrupt:
+    pass
+finally:
+    consumer.close()
+```
+
+## 4. The Analytics Hand-off (DuckDB)
+
+Because we landed the Kafka stream as explicit `.jsonl` (JSON Lines) files in a folder, you can open `raw_landing_zone/clicks.jsonl` right in your IDE/Text Editor and visually verify the data structure.
+
+To process this endpoint in DuckDB natively, you do not need Kafka running or connected. DuckDB just queries the files:
+
+```sql
+-- Run this in DBeaver, Superset, or the DuckDB CLI
+SELECT * 
+FROM read_json_auto('raw_landing_zone/clicks.jsonl');
+
+-- Example Aggregation 
+SELECT action, count(*) 
+FROM read_json_auto('raw_landing_zone/clicks.jsonl')
+GROUP BY action;
+```
+
+### Why this addresses "The Black Box":
+If something breaks in this pipeline:
+1. **Producer failed?** Check the Kafka server logs (identified in `how_to_install.mdx`).
+2. **Consumer failed?** Check the Python stack trace. Nothing is lost because Kafka preserved your consumer group's "Offset". You just restart the Python script and it resumes exactly where it crashed.
+3. **Data looks weird in DuckDB?** Open the physical `clicks.jsonl` file to verify if the anomaly exists in the raw landed data, or if your SQL query is parsing it incorrectly.

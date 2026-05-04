@@ -1,0 +1,77 @@
+# Kafka Local Installation Guide (macOS)
+
+This guide focuses on the *process* of installing Apache Kafka locally. The goal is complete transparency: knowing exactly what is being installed, where it lives on your disk, and where to look when things break (avoiding the "black box" trap of automated setups).
+
+> [!IMPORTANT]
+> **The Paradigm Shift: Bye-bye Zookeeper**
+> Classical Kafka required Apache Zookeeper to manage cluster metadata (leader election, topic configurations, etc.). Modern Kafka (v3.3+) uses **KRaft (Kafka Raft)**. Nodes manage their own quorum, making local setups lighter.
+
+## Approach 1: The Native macOS Way (Homebrew)
+This is simple, but we must understand where Homebrew puts things to avoid losing track of logs and data.
+
+### 1. Install via Homebrew
+```bash
+brew install kafka
+```
+
+### 2. Peeking Under the Hood (CRITICAL)
+Before starting the service, you need to know where its state lives:
+
+*   **Application/Error Logs:** `/opt/homebrew/var/log/kafka/`
+    *   **Always check here first if Kafka fails to start.** You will find `kafka.log` and `server.log`. This is the equivalent of the Dagster log file location that was previously obscured from you.
+*   **Configuration Files:** `/opt/homebrew/etc/kafka/`
+    *   Look at `server.properties` or `kraft/server.properties` here. This file defines the port Kafka listens on, log retention policies, and where data is stored.
+*   **Data Directory (The "Message Log"):** `/opt/homebrew/var/lib/kafka-logs/`
+    *   This is where the actual messages payload is written to disk. If you ever need to perform a hard reset, you clear this directory.
+
+### 3. Start the Kafka Environment
+```bash
+brew services start kafka
+```
+*(To verify it is actually running, you can immediately check the application log mentioned above: `tail -f /opt/homebrew/var/log/kafka/kafka.log`)*
+
+---
+
+## Approach 2: The Portable / Containerized Way (Docker Compose)
+Docker hides files inside virtual Linux containers. To prevent Docker from becoming another black box, we must explicitly map the configuration, data, and logs to our local macOS filesystem using "Volumes".
+
+### 1. Create a `docker-compose.yml`
+Notice the `volumes:` section. This is how we maintain control and visibility over the state.
+
+```yaml
+version: '3.8'
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: local-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:29093'
+      KAFKA_LISTENERS: 'PLAINTEXT://kafka:29092,CONTROLLER://kafka:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+    volumes:
+      # We map the internal container data folder to a local folder in this project so we can literally see the files!
+      - ./kafka_data:/var/lib/kafka/data
+```
+
+### 2. Checking Docker Logs
+When using Docker, the application logs don't live in a text file by default; they are caught by the Docker daemon. You inspect them via the CLI:
+```bash
+docker logs -f local-kafka
+```
+
+### 3. Teardown
+```bash
+docker-compose down
+# And to wipe everything, you physically delete the local mapped folder:
+rm -rf ./kafka_data
+```
